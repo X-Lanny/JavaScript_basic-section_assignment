@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        function getQueryParams(x) {
+            let outcome = {};
+            let num = url.indexOf("?")
+            let result1 = url.slice(num+1,url.length);//hmsr=baidu&timestamp=1675748358355
+            let result2 = result1.split("&");//['hmsr=baidu', 'timestamp=167574835835']
+            for(let i =0;i<result2.length;i++){
+                let result3 = result2[i].split("=");//["hmsr","baidu"];
+                //console.log(result3);
+                outcome[result3 [0]]=result3 [1]//键值对
+                //console.log(outcome);  
+            }
+            //console.log(outcome);
+            return outcome;    
+}
+    const url = "https://www.aitschool.com?hmsr=baidu&timestamp=1675748358355";
+    const result = getQueryParams(url);
+    console.log(result);
+    </script>
+</body>
+
+<!-- params[itemArr[0]] = itemArr[1] 表示将 itemArr[0] 作为键，itemArr[1] 作为值，
+将这对键值对添加到 params 对象中。这样就在 params 对象中创建了一个新的属性（或者修改了已存在属性），该属性的键是 itemArr[0]，值是 itemArr[1]。
+这种语法是 JavaScript 中用来动态设置对象属性的一种常见方式。 -->
+<!-- 
+// 本次作业为在控制台中创建的函数 getQueryParams 解析 url 的参数，把其预期结果打印出来。
+// 1. 新建 index.html
+// 2. 创建 script 标签
+// 3. 在 script 标签创建 getQueryParams 函数处理 url ，返回对象结构。
+
+
+// 预期 result 结果为
+// {
+//   hmsr: "baidu",
+//   timestamp: "1675748358355"
+// } -->

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function lotteryDraw(rangStart, rangEnd, num) {
+            //change into a list
+            let result=[];
+            for(let i =rangStart;i<rangEnd;i++){
+                result.push(i);
+            }
+            // return result
+
+            //get nums
+            let choose = [];
+            function choose_nums(num){
+                for(let j=0;j<num;j++){
+                let index = (rangEnd - rangStart +1) * Math.random();
+                let index2 = result[Math.floor(index)];
+                // console.log(choose)
+                choose.push(index2);
+                }
+                choose.sort();
+                for(let a = 0; a<num-1;a++){
+                    if(choose[a]==choose[a+1]){
+                        choose.splice(a,1);
+                        a--;
+                        // choose.pop(a);
+                    }
+                }
+            }
+            choose_nums(num);
+
+            if(choose.length<num){
+                choose_nums(num-choose.length);
+            }
+            else{
+                return choose;
+            }
+            // return choose;
+
+
+            // choose.sort();
+            // for(let a = 0; a<num;a++){
+            //     if(choose[a]==choose[a+1]){
+            //         choose.pop(a);
+            //     }
+            // }
+            // if(choose.length<5){
+            //     choose_nums(num);
+                
+            // }
+            // else{
+            //     return choose;
+            // }
+
+
+
+            // for(let a = 0; a<num;a++){
+            //     for(let b = 0;b<num;b++){
+            //         if(choose[a]==choose[b]){
+            //             choose.pop(b);
+            //         }
+            //     }
+            // }
+            //array
+            // choose.sort();    
+            // return choose;
+            // let index = (rangEnd - rangStart +1) * Math.random();
+            // let choose[i] = result[Math.floor(index)];
+            // // console.log(choose)
+            // return choose;
+
+            
+        }               
+        let print_outcome = lotteryDraw(2, 20, 5) ;
+        console.log(print_outcome)
+
+    </script>
+</body>
+</html>
+<!-- 本次作业为在控制台中创建的函数 lotteryDraw 抽奖，随机抽取范围内的数值。
+1. 第 1 个参数为范围开始数值
+2. 第 2 个参数为范围结束数值
+3. 第 3 个参数为抽取多少个
+4. 函数返回范围内随机抽取多少个的数组
+5. 注意不能重复取同一个元素 -->
+
+<!-- function lotteryDraw(rangStart, rangEnd, num) {
+
+}
+
+const result = lotteryDraw(2, 20, 5);
+// 预期 result 结果为 [ 2、4、9、12、7 ] 2~20 的其中5个随机数 -->

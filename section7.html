@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        const Series = [
+  {
+    name: 'Web',
+    courses: [
+      {
+        name: 'HTML',
+        lessons: [
+          { name: 'HTML Lesson 1'},
+          { name: 'HTML Lesson 2'}
+        ]
+      }
+      ,
+      {
+        name: 'CSS',
+        lessons: [
+          { name: 'CSS Lesson 1'},
+          { name: 'CSS Lesson 2'}
+        ]
+      }
+    ]
+  },
+  {
+  name: 'PHP',
+    courses: [
+      {
+        name: 'Linux',
+        lessons: [
+         { name: 'Linux Lesson 1'}
+        ]
+      }
+    ]
+  }
+]
+//仅仅使用for循环
+function getLessonCount(datas){
+  let final=[];
+  let count = 0;
+    for(let i =0;i<datas.length;i++){
+      for(let j = 0;j<datas[i].courses.length;j++){
+        count += datas[i].courses[j].lessons.length;
+      }
+      let outcome = {
+        name: datas[i].name,
+        count: count,
+      }
+      // console.log(outcome)
+      final.push(outcome)
+    }
+  return final;
+}
+//使用数组 foreach 方法
+function getLessonCount(datas){
+  let count = 0;
+  let final = []
+  datas.forEach(function(item){
+    item.courses.forEach(function(element){
+      count += element.lessons.length;
+    })
+    let outcome = {
+      name: item.name,
+      count: count,
+    }
+    final.push(outcome);
+  })
+  return final;
+}
+//map 和 reduce
+function getLessonCount(datas){
+  let resultArray = [];
+  datas.forEach(function(item){
+    let arr1 = item.courses.map(function(element){
+      let object_series = {
+        name: item.name,
+        lessons: element.lessons, 
+      }
+      return object_series;
+    })
+    resultArray = resultArray.concat(arr1);
+  })
+  return  resultArray;
+}
+// 通过使用额外的数组（final）来存储信息，您可以在整个迭代过程中累积所需的结果，而不仅仅是在 forEach 函数内部。
+// 计算每个系列下有多少门课
+// 期望结果
+// [{ name: 'Web', count: 4}, {name: 'PHP', count: 1}]
+//map reduce gpt version
+        function getLessonCount(datas) {
+            // 使用 map 函数对每个系列进行处理
+            const result = datas.map(function(series) {
+                // 使用 reduce 函数计算每个系列下的课程总数
+                const count = series.courses.reduce(function(acc, course) {
+                    return acc + course.lessons.length;
+                }, 0);
+
+                // 返回包含系列名和课程总数的对象
+                return {
+                    name: series.name,
+                    count: count
+                };
+            });
+
+            return result; // 返回最终结果数组
+        }
+        const result = getLessonCount(Series);
+        console.log(result);
+    </script>
+</body>
+</html>
+<!-- 本次作业为计算课程章节的总数。
+以下有一段课程系列课程的数据结构，其中包含系列（series）、课程（courses）、课时（lessons）。其中有 Web、PHP 两个系列，Web 系列中包含 HTML、CSS 两个课程，HTML 和 CSS 课程中分别拥有 2 个课时，未来可能会有更多的系列、课程、课时。我们期望一个函数可以统计中各个系列中的课程总数。
+
+任务提示：
+1. 使用数组方法
+2. 使用 ES6 语法（箭头函数）
+3. 用最小的代码行数来实现
+
+任务要求：
+1. 第一次可以尝试用 for 循环来进行迭代计算
+2. 接着需要去掉 for 循环，使用数组 foreach 方法
+3. 需要在方法中使用 map 来结构化数据然后进行返回。
+4. 尝试使用 map 来吧 courses 下的所有 lessons 的长度组合成一个新数组进行返回，再使用 reduce 求和。
+5. 尝试把使用 es6 的箭头函数进行替换 function 函数关键字。 -->
+
+
