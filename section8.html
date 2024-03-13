@@ -7,23 +7,41 @@
 </head>
 <body>
     <script type="text/javascript">
-        function getQueryParams(x) {
-            let outcome = {};
-            let num = url.indexOf("?")
-            let result1 = url.slice(num+1,url.length);//hmsr=baidu&timestamp=1675748358355
-            let result2 = result1.split("&");//['hmsr=baidu', 'timestamp=167574835835']
-            for(let i =0;i<result2.length;i++){
-                let result3 = result2[i].split("=");//["hmsr","baidu"];
-                //console.log(result3);
-                outcome[result3 [0]]=result3 [1]//键值对
-                //console.log(outcome);  
-            }
-            //console.log(outcome);
-            return outcome;    
-}
-    const url = "https://www.aitschool.com?hmsr=baidu&timestamp=1675748358355";
-    const result = getQueryParams(url);
-    console.log(result);
+//         function getQueryParams(url) {
+//             let outcome = {};
+//             let num = url.indexOf("?")
+//             let result1 = url.slice(num+1,url.length);//hmsr=baidu&timestamp=1675748358355
+//             let result2 = result1.split("&");//['hmsr=baidu', 'timestamp=167574835835']
+//             for(let i =0;i<result2.length;i++){
+//                 let result3 = result2[i].split("=");//["hmsr","baidu"];
+//                 //console.log(result3);
+//                 outcome[result3 [0]]=result3 [1]//键值对
+//                 //console.log(outcome);  
+//             }
+//             //console.log(outcome);
+//             return outcome;    
+// }
+//     const input_url = "https://www.aitschool.com?hmsr=baidu&timestamp=1675748358355";
+//     const result = getQueryParams(input_url);
+//     console.log(result);
+        //0313 review
+        function getQueryParams(input_url) {
+            let final = {};
+            let index = input_url.indexOf("?");
+            let str = input_url.slice(index+1, input_url.length);//hmsr=baidu&timestamp=1675748358355
+            let arr = str.split("&")// ['hmsr=baidu', 'timestamp=1675748358355']
+            arr.forEach(function(item){
+                let [key, value] = item.split("=");//？？？
+                final[key] = value;//？？？
+                 // let arrSplit = item.split("=");
+                // final[item[0]] = item[1]
+            })
+            console.log(final)
+            return final;
+        }
+        const url = "https://www.aitschool.com?hmsr=baidu&timestamp=1675748358355";
+        const result = getQueryParams(url);
+        // console.log(result)；
     </script>
 </body>
 

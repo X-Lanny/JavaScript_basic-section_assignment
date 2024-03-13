@@ -192,11 +192,11 @@ const fun2 = function(a, b) {
     a + b;
 }
 // 这样写也不行 console.log(fun2(2,3))
-let sum1 = 0;
 function odd(a){
+    let sum1 = 0;
     for(let i = 1; i<=a ;i++){
         if(i%2 !== 0){
-            sum += i
+            sum1 += i
         }
     }
     return sum1;

@@ -41,77 +41,101 @@
   }
 ]
 //仅仅使用for循环
-function getLessonCount(datas){
-  let final=[];
-  let count = 0;
-    for(let i =0;i<datas.length;i++){
-      for(let j = 0;j<datas[i].courses.length;j++){
-        count += datas[i].courses[j].lessons.length;
-      }
-      let outcome = {
-        name: datas[i].name,
-        count: count,
-      }
-      // console.log(outcome)
-      final.push(outcome)
-    }
-  return final;
-}
+// function getLessonCount(datas){
+//   let final=[];
+//   let count = 0;
+//     for(let i =0;i<datas.length;i++){
+//       for(let j = 0;j<datas[i].courses.length;j++){
+//         count += datas[i].courses[j].lessons.length;
+//       }
+//       let outcome = {
+//         name: datas[i].name,
+//         count: count,
+//       }
+//       // console.log(outcome)
+//       final.push(outcome)
+//     }
+//   return final;
+// }
 //使用数组 foreach 方法
-function getLessonCount(datas){
-  let count = 0;
-  let final = []
-  datas.forEach(function(item){
-    item.courses.forEach(function(element){
-      count += element.lessons.length;
-    })
-    let outcome = {
-      name: item.name,
-      count: count,
-    }
-    final.push(outcome);
-  })
-  return final;
-}
+// function getLessonCount(datas){
+//   let count = 0;
+//   let final = []
+//   datas.forEach(function(item){
+//     item.courses.forEach(function(element){
+//       count += element.lessons.length;
+//     })
+//     let outcome = {
+//       name: item.name,
+//       count: count,
+//     }
+//     final.push(outcome);
+//   })
+//   return final;
+// }
 //map 和 reduce
 function getLessonCount(datas){
-  let resultArray = [];
-  datas.forEach(function(item){
-    let arr1 = item.courses.map(function(element){
-      let object_series = {
-        name: item.name,
-        lessons: element.lessons, 
-      }
-      return object_series;
-    })
-    resultArray = resultArray.concat(arr1);
+  let final= datas.map(function(item){
+    let count = item.courses.reduce(function(pre,cur){
+      return pre + cur.lessons.length;
+    },0)
+    let result =  {
+      name:item.name,
+      count: count,
+    }
+    console.log(result)
+    return result;
   })
-  return  resultArray;
+  return final
 }
+const result = getLessonCount(Series);
+console.log(result);
+// If the console.log(result) statement is placed after the return statement, 
+// which means it will never be executed. 
+
+// The undefined is likely caused by the fact that your getLessonCount function doesn't explicitly return a value. 
+// In JavaScript, if a function doesn't have a return statement or if the return statement is without a value, the function returns undefined by default.
+
+
+
+// function getLessonCount(datas){
+//   let resultArray = [];
+//   datas.forEach(function(item){
+//     let arr1 = item.courses.map(function(element){
+//       let object_series = {
+//         name: item.name,
+//         lessons: element.lessons, 
+//       }
+//       return object_series;
+//     })
+//     resultArray = resultArray.concat(arr1);
+//   })
+//   return  resultArray;
+// }
 // 通过使用额外的数组（final）来存储信息，您可以在整个迭代过程中累积所需的结果，而不仅仅是在 forEach 函数内部。
 // 计算每个系列下有多少门课
 // 期望结果
 // [{ name: 'Web', count: 4}, {name: 'PHP', count: 1}]
 //map reduce gpt version
-        function getLessonCount(datas) {
-            // 使用 map 函数对每个系列进行处理
-            const result = datas.map(function(series) {
-                // 使用 reduce 函数计算每个系列下的课程总数
-                const count = series.courses.reduce(function(acc, course) {
-                    return acc + course.lessons.length;
-                }, 0);
+        // function getLessonCount(datas) {
+        //     // 使用 map 函数对每个系列进行处理
+        //     const result = datas.map(function(series) {
+        //         // 使用 reduce 函数计算每个系列下的课程总数
+        //         const count = series.courses.reduce(function(acc, course){
+        //             return acc + course.lessons.length;
+        //         }, 0);
 
-                // 返回包含系列名和课程总数的对象
-                return {
-                    name: series.name,
-                    count: count
-                };
-            });
+        //         // 返回包含系列名和课程总数的对象
+        //         return {
+        //             name: series.name,
+        //             count: count
+        //         };
+        //     });
 
-            return result; // 返回最终结果数组
-        }
-        const result = getLessonCount(Series);
-        console.log(result);
+        //     return result; // 返回最终结果数组
+        // }
+        // const result = getLessonCount(Series);
+        // console.log(result);
     </script>
 </body>
 </html>
